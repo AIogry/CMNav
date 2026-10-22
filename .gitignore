@@ -1,0 +1,16 @@
+.env/
+.venv/
+.cache/
+data/*
+!data/README.md
+outputs/*
+!outputs/.gitkeep
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+configs/*.local.yaml
+docs/
+.worktrees/

@@ -1,0 +1,12 @@
+name: cmnav
+channels:
+  - conda-forge
+  - aihabitat
+  - nodefaults
+dependencies:
+  - python=3.9
+  - habitat-sim=0.3.3=py3.9_headless_linux_acbe6f4922e68145e401e55c30f9dfea460a3f24
+  - headless=2.0
+  - numpy=1.26.4
+  - pip
+

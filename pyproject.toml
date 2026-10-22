@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cmnav"
+version = "0.1.0"
+description = "CML/GCML visual navigation research with reproducible Habitat experiments"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24,<2", "PyYAML>=6,<7", "Pillow>=9,<12"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7,<9"]
+
+[project.scripts]
+cmnav = "cmnav.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+

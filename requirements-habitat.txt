@@ -1,0 +1,2 @@
+-c constraints.txt
+habitat-lab @ https://github.com/facebookresearch/habitat-lab/archive/094d6be2f9d057e4781a68ae792132895fd4d3d0.tar.gz#subdirectory=habitat-lab

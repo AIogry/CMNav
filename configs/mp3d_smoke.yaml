@@ -1,0 +1,41 @@
+# Paths resolve relative to project_root, which is relative to THIS file.
+schema_version: 1
+project_root: ..
+seed: 7
+protocol: environment_smoke
+
+dataset:
+  name: mp3d
+  split: train
+  episodes_path: data/datasets/pointnav/mp3d/v1/{split}/{split}.json.gz
+  scenes_dir: data/scene_datasets
+  scene_dataset_config: data/scene_datasets/mp3d/mp3d.scene_dataset_config.json
+  scene_ids: [17DRP5sb8fy]
+
+environment:
+  max_episode_steps: 40
+  forward_step_size: 0.25
+  turn_angle: 30
+  gpu_device_id: 1
+  # Provisional interpretation of "no GPS/Compass": a fixed start-frame goal.
+  # No continuously updated ground-truth goal vector is exposed to the policy.
+  goal_sensor: fixed
+  goal_dimensions: 3
+  rgbd:
+    width: 256
+    height: 256
+    hfov: 90
+    sensor_height: 1.25
+    min_depth: 0.0
+    max_depth: 10.0
+    normalize_depth: false
+
+policy:
+  name: random
+  forward_probability: 0.6
+
+run:
+  episodes: 1
+  output_dir: outputs
+  save_every: 1
+  preview_fps: 5

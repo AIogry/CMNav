@@ -1,0 +1,22 @@
+# Small integration validation; not a formal training dataset.
+schema_version: 1
+protocol: exploration_v1
+purpose: development
+base_config: mp3d_smoke.yaml
+seed: 7
+
+collection:
+  trajectories_per_scene: 2
+  steps_per_trajectory: 64
+  output_dir: data/validation/collection_runs
+  plan_dir: data/validation/collection_plans
+
+policy:
+  name: depth_walk_v1
+  obstacle_distance: 0.6
+  depth_quantile: 0.2
+  min_valid_fraction: 0.25
+  min_forward_steps: 4
+  max_forward_steps: 12
+  min_turn_steps: 1
+  max_turn_steps: 3

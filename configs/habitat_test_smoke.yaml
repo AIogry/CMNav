@@ -1,0 +1,39 @@
+# Public Habitat test scene. This is NOT an MP3D experiment.
+schema_version: 1
+project_root: ..
+seed: 7
+protocol: environment_smoke
+
+dataset:
+  name: habitat_test
+  split: train
+  episodes_path: data/datasets/pointnav/habitat-test-scenes/v1/{split}/{split}.json.gz
+  scenes_dir: data/scene_datasets
+  scene_ids: [skokloster-castle]
+
+environment:
+  max_episode_steps: 40
+  forward_step_size: 0.25
+  turn_angle: 30
+  gpu_device_id: 1
+  goal_sensor: fixed
+  goal_dimensions: 3
+  rgbd:
+    width: 256
+    height: 256
+    hfov: 90
+    sensor_height: 1.25
+    min_depth: 0.0
+    max_depth: 10.0
+    normalize_depth: false
+
+policy:
+  name: random
+  forward_probability: 0.6
+
+run:
+  episodes: 1
+  output_dir: outputs
+  save_every: 1
+  preview_fps: 5
+

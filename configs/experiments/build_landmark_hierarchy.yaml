@@ -1,0 +1,8 @@
+schema_version: 1
+operation: hierarchy
+profile: build
+working_directory: ../..
+options:
+  source-run: outputs/gcml_navigation/20261023T155112Z_986f4f6b
+  settings: configs/experiments/landmark_hierarchy_protocol.json
+  output-root: outputs/landmark_hierarchy/structures

@@ -1,0 +1,5 @@
+{
+  "source_batches_per_epoch": 1273,
+  "source_exposures_per_epoch": 9900,
+  "exposures_per_edge": 20
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Original full-goal failure audit cohort; compatibility defaults, user flags override.",
+  "arguments": [
+    "--expected-tasks",
+    "5",
+    "--expected-candidates",
+    "64"
+  ]
+}

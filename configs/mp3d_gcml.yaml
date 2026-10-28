@@ -1,0 +1,18 @@
+# GCML v1: same frozen experience, replay and physical controller as CML.
+schema_version: 1
+protocol: gcml_pointnav_residual_readout_v1
+graph_config: mp3d_oracle_graph_balanced.yaml
+methods: [dijkstra, gcml, gcml_graph_affordance, gcml_greedy]
+output_dir: outputs/gcml_navigation
+gcml_inverse_learning_rate: 0.001
+gcml_affordance_learning_rate: 0.0005
+# Residual step capped by a conservative batch curvature bound.
+gcml_readout_step_safety: 1.8
+gcml_candidates: 64
+gcml_horizon: 96
+# Gaussian noise after full utility-vector L2 normalization.
+gcml_noise_scale: 0.2
+gcml_affordance_threshold: 0.5
+gcml_association_radius: 0.1
+gcml_association_margin: 0.1
+gcml_cycle_policy: terminate_on_retrieved_state

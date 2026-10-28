@@ -1,0 +1,9 @@
+schema_version: 1
+operation: hierarchy
+profile: train
+working_directory: ../..
+options:
+  structure: outputs/landmark_hierarchy/structures/20261026T133934Z_0e7a8fa1
+  settings: configs/experiments/landmark_hierarchy_protocol.json
+  reference: configs/gcml_reference.json
+  output-root: outputs/landmark_hierarchy/training

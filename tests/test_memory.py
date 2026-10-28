@@ -6,7 +6,7 @@ import json
 import numpy as np
 import pytest
 
-from cmnav.memory import CONTEXT_FIELDS, MemoryStoreError, SceneMemoryStore
+from cmnav.memory.snapshots import CONTEXT_FIELDS, MemoryStoreError, SceneMemoryStore
 
 
 @pytest.fixture

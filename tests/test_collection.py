@@ -8,11 +8,12 @@ import numpy as np
 import pytest
 import yaml
 
-from cmnav import collection
-from cmnav.collection_config import data_path, load_collection_config
-from cmnav.config import ConfigError
-from cmnav.exploration_policy import DepthWalkPolicy
-from cmnav.trajectories import TrajectoryReader
+from cmnav.data import exploration_plans
+from cmnav.workflows import exploration_collection as collection
+from cmnav.configuration.exploration import data_path, load_collection_config
+from cmnav.configuration.validation import ConfigError
+from cmnav.policies.depth_walk import DepthWalkPolicy
+from cmnav.data.trajectories import TrajectoryReader
 
 
 PROJECT = Path(__file__).resolve().parents[1]
@@ -120,7 +121,7 @@ class FakeEnvironment:
 @pytest.fixture
 def fake_preflight(monkeypatch):
     monkeypatch.setattr(collection, "inspect_environment", lambda config: {"ready_for_run": True})
-    monkeypatch.setattr(collection, "_versions", lambda: {"runtime": "test"})
+    monkeypatch.setattr(collection, "runtime_versions", lambda: {"runtime": "test"})
 
 
 def test_config_resolves_paths_and_overrides_seed_and_budget(setup, monkeypatch, tmp_path):
@@ -174,8 +175,8 @@ def test_data_path_rejects_symlink_escape(setup, tmp_path):
 
 def test_plan_selection_is_deterministic_pins_assets_and_omits_goal(setup):
     config = load(setup)
-    first = json.loads(collection.create_collection_plan(config).read_text())
-    second = json.loads(collection.create_collection_plan(config).read_text())
+    first = json.loads(exploration_plans.create_collection_plan(config).read_text())
+    second = json.loads(exploration_plans.create_collection_plan(config).read_text())
     assert first["plan_id"] != second["plan_id"]
     assert first["payload"] == second["payload"]
     payload = first["payload"]
@@ -186,14 +187,14 @@ def test_plan_selection_is_deterministic_pins_assets_and_omits_goal(setup):
     assert "goals" not in json.dumps(payload)
     assert len(payload["fingerprints"]) == 7  # Root, two shards, two meshes, two navmeshes.
     config["seed"] += 1
-    different = json.loads(collection.create_collection_plan(config).read_text())
+    different = json.loads(exploration_plans.create_collection_plan(config).read_text())
     assert payload["starts"] != different["payload"]["starts"]
 
 
 @pytest.mark.parametrize("mutation", ["asset", "source", "config", "pose"])
 def test_collection_rejects_changed_plan_config_or_source_before_environment(setup, fake_preflight, mutation):
     config = load(setup)
-    plan_path = collection.create_collection_plan(config)
+    plan_path = exploration_plans.create_collection_plan(config)
     plan = json.loads(plan_path.read_text())
     if mutation == "asset":
         Path(plan["payload"]["starts"][0]["scene_id"]).write_bytes(b"changed")
@@ -231,7 +232,7 @@ def test_plan_rejects_invalid_source_episodes(setup, mutation):
         data["episodes"][0]["scene_id"] = "mp3d/sceneB/sceneB.glb"
     write_gzip(shard, data)
     with pytest.raises(ValueError):
-        collection.create_collection_plan(config)
+        exploration_plans.create_collection_plan(config)
 
 
 def test_policy_uses_reproducible_segments_and_no_stop(setup):
@@ -258,7 +259,7 @@ def test_policy_rejects_goal_or_diagnostic_input(setup):
 
 def test_collection_exact_starts_actions_boundaries_and_audit_separation(setup, fake_preflight):
     config = load(setup)
-    plan_path = collection.create_collection_plan(config)
+    plan_path = exploration_plans.create_collection_plan(config)
     environments = []
     def factory(*args):
         environments.append(FakeEnvironment(*args))
@@ -305,7 +306,7 @@ def test_collection_exact_starts_actions_boundaries_and_audit_separation(setup, 
 ])
 def test_collection_aborts_partial_data_and_closes_environment(setup, fake_preflight, options, message):
     config = load(setup)
-    plan_path = collection.create_collection_plan(config)
+    plan_path = exploration_plans.create_collection_plan(config)
     environments = []
     def factory(*args):
         environments.append(FakeEnvironment(*args, **options))
@@ -325,7 +326,7 @@ def test_collection_aborts_partial_data_and_closes_environment(setup, fake_prefl
 
 def test_collection_preflight_failure_never_constructs_environment(setup, monkeypatch):
     config = load(setup)
-    plan_path = collection.create_collection_plan(config)
+    plan_path = exploration_plans.create_collection_plan(config)
     monkeypatch.setattr(collection, "inspect_environment", lambda config: {"ready_for_run": False})
     def factory(*args):
         pytest.fail("Preflight failure must precede environment construction")
@@ -336,7 +337,7 @@ def test_collection_preflight_failure_never_constructs_environment(setup, monkey
 
 def test_cleanup_failure_marks_dataset_failed(setup, fake_preflight):
     config = load(setup)
-    plan_path = collection.create_collection_plan(config)
+    plan_path = exploration_plans.create_collection_plan(config)
     with pytest.raises(RuntimeError, match="cleanup failure"):
         collection.collect_trajectories(config, plan_path,
                                         env_factory=lambda *args: FakeEnvironment(*args, close_failure=True))

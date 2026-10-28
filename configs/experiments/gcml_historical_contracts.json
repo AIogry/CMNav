@@ -1,0 +1,25 @@
+{
+  "schema": "cmnav.gcml_historical_contracts.v1",
+  "replay_source": {
+    "seed": 7,
+    "cml_epochs": 100,
+    "cml_dimension": 1000,
+    "cml_device": "cpu",
+    "cml_sampling": "balanced_edge_walks"
+  },
+  "full_goal_source": {
+    "seed": 7,
+    "cml_epochs": 100,
+    "gcml_gate_mode": "hard",
+    "evaluation_episodes": 5
+  },
+  "teacher_gate": {
+    "source_run": "outputs/gcml_subgoals/20261023T163827Z_7efd60cf",
+    "max_steps": 500,
+    "gcml_candidates": 64,
+    "gcml_horizon": 96,
+    "gcml_noise_scale": 0.2,
+    "teacher_interval": 4,
+    "evaluation_episodes": 5
+  }
+}

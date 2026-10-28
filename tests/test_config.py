@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from cmnav.config import ConfigError, load_config
+from cmnav.configuration.environment import load_config
+from cmnav.configuration.validation import ConfigError
 
 
 @pytest.fixture

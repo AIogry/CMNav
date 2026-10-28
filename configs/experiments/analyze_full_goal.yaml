@@ -1,0 +1,9 @@
+schema_version: 1
+operation: analyze
+profile: full-goal
+working_directory: ../..
+options:
+  run: outputs/gcml_navigation/20261023T155112Z_986f4f6b
+  output: outputs/gcml_analysis/config_example_full_goal
+  expected-tasks: 5
+  expected-candidates: 64

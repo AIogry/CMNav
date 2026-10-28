@@ -12,6 +12,7 @@ dependencies = ["numpy>=1.24,<2", "PyYAML>=6,<7", "Pillow>=9,<12"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7,<9"]
+learning = ["torch==2.8.0"]
 
 [project.scripts]
 cmnav = "cmnav.cli:main"
@@ -22,4 +23,3 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-

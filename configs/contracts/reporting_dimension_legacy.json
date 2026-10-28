@@ -1,0 +1,25 @@
+{
+  "schema": "cmnav.dimension_report_contract.v1",
+  "description": "Optional exact historical dimension-sweep expectations; not defaults for a new sweep.",
+  "dimensions": [
+    1000,
+    3000,
+    5000
+  ],
+  "shared_settings": {
+    "node_count": 331,
+    "edge_count": 495,
+    "task_count": 5,
+    "seed": 7,
+    "epochs": 100,
+    "trajectory_batches_per_epoch": 1273,
+    "transitions_per_epoch": 9900
+  },
+  "planning_settings": {
+    "gcml_candidates": 64,
+    "gcml_horizon": 96,
+    "gcml_noise_scale": 0.2,
+    "gcml_affordance_threshold": 0.5,
+    "gcml_association_radius": 0.1
+  }
+}

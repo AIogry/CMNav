@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from cmnav.trajectories import TrajectoryReader, TrajectoryWriter
+from cmnav.data.trajectories import TrajectoryReader, TrajectoryWriter
 
 
 def observation(index=0, *, channels=3, singleton_depth=False):

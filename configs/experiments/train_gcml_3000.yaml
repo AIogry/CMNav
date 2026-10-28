@@ -1,0 +1,13 @@
+# Example only: inspect with --describe; choose a fresh output path before running.
+schema_version: 1
+operation: train-gcml
+profile: replay
+working_directory: ../..
+options:
+  source: outputs/gcml_navigation/20261023T155112Z_986f4f6b
+  dimension: 3000
+  epochs: 20
+  seed: 7
+  device: cuda:0
+  contract: configs/experiments/gcml_historical_contracts.json
+  output: outputs/gcml_training/config_example_d3000

@@ -1,0 +1,23 @@
+{
+  "schema": "cmnav.gcml_reference.v1",
+  "repository": "https://github.com/LH-cbicr/GCML",
+  "commit": "f91243f20414f9380ebdfc6a48fb6b35eb20eb89",
+  "notebook_path": "gcml_abstract_graph.ipynb",
+  "notebook_sha256": "0eeec3941246fa46bbbf6e7ff85be46d901cf758c1ef76f237833913034c1644",
+  "notebook_bytes": 1277661,
+  "commit_url": "https://github.com/LH-cbicr/GCML/commit/f91243f20414f9380ebdfc6a48fb6b35eb20eb89",
+  "source_url": "https://raw.githubusercontent.com/LH-cbicr/GCML/f91243f20414f9380ebdfc6a48fb6b35eb20eb89/gcml_abstract_graph.ipynb",
+  "retrieved_date": "2026-10-23",
+  "pin_resolution": "latest_commit_modifying_notebook_from_GitHub_API",
+  "published_paper": "https://doi.org/10.1038/s42256-026-01254-4",
+  "published_paper_fulltext_xml": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13395624/fullTextXML",
+  "implementation_scope": "official_notebook_derived_PointNav_adaptation_not_exact_paper_reproduction",
+  "known_reference_discrepancies": [
+    "Published equation 14 uses a pure Hebbian W update; the notebook uses a residual delta rule.",
+    "Notebook G prediction uses the next state while its target and outer product use the source state; published equation 17 consistently uses the current state.",
+    "Notebook DataLoader groups trajectories but its training loop selects only trajectory[0].",
+    "Notebook multiplicative zero masking does not reliably exclude actions with signed utilities.",
+    "Notebook checks arrival using the pre-action latent after appending an action and reward.",
+    "Notebook candidate reward selection does not require predicted arrival, and its outer execution loop exits after one selected action."
+  ]
+}

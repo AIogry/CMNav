@@ -1,0 +1,7 @@
+schema_version: 1
+operation: hierarchy
+profile: report
+working_directory: ../..
+options:
+  source-run: outputs/landmark_hierarchy/evaluation/20261026T134433Z_3c00f647
+  output-root: outputs/landmark_hierarchy/reports

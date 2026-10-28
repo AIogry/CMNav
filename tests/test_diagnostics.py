@@ -11,7 +11,8 @@ import urllib.request
 
 import pytest
 
-from cmnav import diagnostics
+from cmnav.envs import diagnostics
+from cmnav.data import pointnav
 
 
 @pytest.fixture
@@ -180,7 +181,7 @@ def test_unknown_habitat_distribution_version_warns_but_does_not_crash(dataset, 
 
 def test_gzip_decompression_is_bounded(dataset, monkeypatch):
     write_gzip(Path(dataset["dataset"]["episodes_path"]), {"episodes": [episode("scene_a")]})
-    monkeypatch.setattr(diagnostics, "MAX_JSON_BYTES", 8)
+    monkeypatch.setattr(pointnav, "MAX_JSON_BYTES", 8)
 
     report = diagnostics.inspect_environment(dataset)
 

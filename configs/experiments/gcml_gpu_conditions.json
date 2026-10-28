@@ -1,0 +1,136 @@
+{
+  "schema": "cmnav.gcml_condition_profile.v1",
+  "base_overrides": {
+    "gcml_noise_schedule": "indexed_full",
+    "gcml_noise_scale": 0.2,
+    "gcml_first_step_affordance_mode": "observed_graph",
+    "gcml_latent_projection": "none",
+    "gcml_cache_mode": "none"
+  },
+  "definitions": {
+    "raw_imagination": {
+      "method": "gcml",
+      "variant": "raw",
+      "overrides": {}
+    },
+    "fit_imagination": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {}
+    },
+    "graph_greedy": {
+      "method": "gcml_greedy",
+      "variant": "raw",
+      "overrides": {}
+    },
+    "raw_learned_greedy": {
+      "method": "gcml_greedy",
+      "variant": "raw",
+      "overrides": {
+        "gcml_first_step_affordance_mode": "learned"
+      }
+    },
+    "fit_learned_greedy": {
+      "method": "gcml_greedy",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_first_step_affordance_mode": "learned"
+      }
+    },
+    "raw_pure_imagination": {
+      "method": "gcml",
+      "variant": "raw",
+      "overrides": {
+        "gcml_first_step_affordance_mode": "learned"
+      }
+    },
+    "fit_pure_imagination": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_first_step_affordance_mode": "learned"
+      }
+    },
+    "fit_graph_imagination": {
+      "method": "gcml_graph_affordance",
+      "variant": "minimum_change",
+      "overrides": {}
+    },
+    "minimum_norm_imagination": {
+      "method": "gcml",
+      "variant": "minimum_norm",
+      "overrides": {}
+    },
+    "fit_noise_0.1": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.1
+      }
+    },
+    "fit_noise_0.05": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.05
+      }
+    },
+    "fit_noise_0.02": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.02
+      }
+    },
+    "fit_noise_0": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0
+      }
+    },
+    "fit_snap_0.05": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.05,
+        "gcml_latent_projection": "confident_nearest",
+        "gcml_cache_mode": "none"
+      }
+    },
+    "fit_cache_0.05": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.05,
+        "gcml_latent_projection": "none",
+        "gcml_cache_mode": "suffix_on_no_plan"
+      }
+    },
+    "fit_snap_cache_0.05": {
+      "method": "gcml",
+      "variant": "minimum_change",
+      "overrides": {
+        "gcml_noise_scale": 0.05,
+        "gcml_latent_projection": "confident_nearest",
+        "gcml_cache_mode": "suffix_on_no_plan"
+      }
+    }
+  },
+  "historical_controls": {
+    "methods": [
+      "gcml",
+      "gcml_graph_affordance",
+      "gcml_greedy",
+      "dijkstra"
+    ],
+    "epoch": 100,
+    "planning_seed": 7,
+    "source_field": "historical_5000"
+  },
+  "allowed_cuda_visible_devices": [
+    null,
+    "",
+    "0,1"
+  ]
+}

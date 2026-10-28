@@ -1,0 +1,13 @@
+# Same implementation, a different declared dimension/device/output.
+schema_version: 1
+operation: train-gcml
+profile: replay
+working_directory: ../..
+options:
+  source: outputs/gcml_navigation/20261023T155112Z_986f4f6b
+  dimension: 5000
+  epochs: 20
+  seed: 7
+  device: cuda:1
+  contract: configs/experiments/gcml_historical_contracts.json
+  output: outputs/gcml_training/config_example_d5000

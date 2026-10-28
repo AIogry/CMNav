@@ -1,0 +1,24 @@
+# Sampling control: identical to mp3d_oracle_graph_balanced.yaml except epochs.
+schema_version: 1
+protocol: oracle_state_graph_diagnostic_v1
+base_config: mp3d_smoke.yaml
+seed: 7
+learning_episodes: 20
+evaluation_episodes: 5
+max_steps: 500
+merge_radius: 0.2
+attachment_radius: 0.5
+local_goal_radius: 0.15
+max_local_steps: 32
+max_graph_hops: 300
+cml_dimension: 1000
+cml_sampling: balanced_edge_walks
+cml_edge_visits: 20
+cml_walk_length: 32
+cml_epochs: 10
+cml_device: cpu
+learning_rate: 0.01
+state_learning_rate: 0.1
+inverse_learning_rate: 0.01
+methods: [oracle_follower, dijkstra, cml, random_graph]
+output_dir: outputs/oracle_graph_navigation

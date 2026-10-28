@@ -1,0 +1,11 @@
+schema_version: 1
+operation: hierarchy
+profile: evaluate
+working_directory: ../..
+options:
+  structure: outputs/landmark_hierarchy/structures/20261026T133934Z_0e7a8fa1
+  high-training: outputs/landmark_hierarchy/training/20261026T134010Z_61f006e7
+  low-checkpoint: outputs/gcml_gpu_mechanisms/20261025T135634Z_03827363/training/checkpoints/epoch_100/model_minimum_change.pt
+  low-training: outputs/gcml_gpu_mechanisms/20261025T135634Z_03827363/training
+  settings: configs/experiments/landmark_hierarchy_protocol.json
+  output-root: outputs/landmark_hierarchy/evaluation

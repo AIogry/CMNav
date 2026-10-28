@@ -1,0 +1,76 @@
+{
+  "schema": "cmnav.landmark_hierarchy_protocol.v1",
+  "scope": "frozen_abstract_graph_development",
+  "structure": {
+    "h_select": 4,
+    "formation_transitions": 2000,
+    "macro_max_steps": 8,
+    "attach_max_steps": 8
+  },
+  "training": {
+    "dimension": 1000,
+    "epochs": 100,
+    "visits_per_edge": 20,
+    "seed": 7,
+    "device": "cuda:1",
+    "readout_rcond": 1e-12,
+    "learning": {
+      "learning_rate": 0.01,
+      "state_learning_rate": 0.1,
+      "inverse_learning_rate": 0.001,
+      "affordance_learning_rate": 0.0005,
+      "readout_step_safety": 1.8
+    }
+  },
+  "planning": {
+    "candidates": 64,
+    "local_horizon": 8,
+    "high_horizon": 32,
+    "flat_horizon": 64,
+    "latent_projection": "none",
+    "endpoint_candidates": 3,
+    "max_graph_steps": 500,
+    "max_model_transitions": 65536,
+    "noise_scale": 0.02,
+    "affordance_threshold": 0.5,
+    "association_radius": 0.1,
+    "association_margin": 0.1,
+    "flat_candidates": 1024,
+    "noise_schedule": "indexed_full",
+    "cycle_policy": "terminate_on_retrieved_state"
+  },
+  "evaluation": {
+    "device": "cuda:0",
+    "planning_seeds": [
+      7,
+      107,
+      207
+    ],
+    "methods": [
+      "dijkstra",
+      "flat_gcml",
+      "hierarchical_dijkstra",
+      "hierarchical_gcml"
+    ]
+  },
+  "permissions": {
+    "node_identity": "given_abstract_graph_ids",
+    "first_step_mask": "known_outgoing_at_query_start_including_hypothetical_endpoint_queries",
+    "future_imagination": "learned_G_no_true_graph_filtering",
+    "readout_labels": "all_observed_nodes_including_sinks_at_both_levels",
+    "high_dijkstra": "observed_macro_graph_baseline_only",
+    "task_endpoints_used_for_structure": false,
+    "future_graph_audit_used_for_selection": false
+  },
+  "execution": {
+    "unit": "directed_low_graph_edge",
+    "rule": "execute_selected_local_plan_until_target_or_failure",
+    "intermediate_other_landmarks": "continue_to_selected_target",
+    "macro_completion": "actual_node_equals_selected_target",
+    "recovery_retries": 0,
+    "model_parameters_frozen": true,
+    "habitat_execution": false
+  },
+  "interpretation": "First development protocol, frozen before outcome inspection; not an independent generalization benchmark.",
+  "budget_interpretation": "Same 65536 model-transition ceiling; flat gets one 1024x64 query, hierarchy gets bounded 64-candidate queries sharing cap. Actual transitions and FLOPs are not matched."
+}

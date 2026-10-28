@@ -1,0 +1,90 @@
+{
+  "schema": "cmnav.historical_report_cohort.v1",
+  "description": "Explicit original teacher-subgoal and CUDA mechanism report cohort; dimension reporting derives its cohort from the frozen task manifest.",
+  "task_count": 5,
+  "training_seed_count": 1,
+  "subgoal_modes": [
+    "gcml",
+    "gcml_graph_affordance"
+  ],
+  "subgoal_intervals": [
+    null,
+    4,
+    8,
+    16
+  ],
+  "noise_conditions": [
+    [
+      0.0,
+      "fit_noise_0"
+    ],
+    [
+      0.02,
+      "fit_noise_0.02"
+    ],
+    [
+      0.05,
+      "fit_noise_0.05"
+    ],
+    [
+      0.1,
+      "fit_noise_0.1"
+    ],
+    [
+      0.2,
+      "fit_imagination"
+    ]
+  ],
+  "paired_contrasts": [
+    [
+      "补全并拟合 G",
+      "raw_imagination",
+      "fit_imagination"
+    ],
+    [
+      "G 解的选择",
+      "fit_imagination",
+      "minimum_norm_imagination"
+    ],
+    [
+      "原 G 的第一步权限",
+      "raw_imagination",
+      "raw_pure_imagination"
+    ],
+    [
+      "拟合 G 的第一步权限",
+      "fit_imagination",
+      "fit_pure_imagination"
+    ],
+    [
+      "greedy 的原 G 门控",
+      "graph_greedy",
+      "raw_learned_greedy"
+    ],
+    [
+      "greedy 的拟合 G 门控",
+      "graph_greedy",
+      "fit_learned_greedy"
+    ],
+    [
+      "想象的经验图辅助",
+      "fit_imagination",
+      "fit_graph_imagination"
+    ],
+    [
+      "snap 单变量，噪声 0.05",
+      "fit_noise_0.05",
+      "fit_snap_0.05"
+    ],
+    [
+      "cache 单变量，噪声 0.05",
+      "fit_noise_0.05",
+      "fit_cache_0.05"
+    ],
+    [
+      "已有 snap 时增加 cache",
+      "fit_snap_0.05",
+      "fit_snap_cache_0.05"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+# Engineering diagnostic: privileged state association and local control.
+# Every evaluation task restores the same frozen graph; no online map updates.
+# Both task subsets come from train in one scene, not official held-out testing.
+schema_version: 1
+protocol: oracle_state_graph_diagnostic_v1
+base_config: mp3d_smoke.yaml
+seed: 7
+
+learning_episodes: 20
+evaluation_episodes: 5
+max_steps: 500
+
+# Distances are metres. Attachments are local and capped at 1 m by the loader.
+merge_radius: 0.2
+attachment_radius: 0.5
+local_goal_radius: 0.15
+max_local_steps: 32
+max_graph_hops: 300
+
+# Original CML abstract-graph state dimension (dense learned embeddings).
+cml_dimension: 1000
+# Graph random walks are training replay, not new physical RGB-D collection.
+# Length counts visited nodes: 32 nodes provide 31 transitions per walk.
+cml_random_walks: 200
+cml_walk_length: 32
+cml_epochs: 10
+# Explicit execution device; use cuda:N only when that device is available.
+cml_device: cpu
+learning_rate: 0.01
+state_learning_rate: 0.1
+inverse_learning_rate: 0.01
+
+methods: [oracle_follower, dijkstra, cml, random_graph]
+output_dir: outputs/oracle_graph_navigation

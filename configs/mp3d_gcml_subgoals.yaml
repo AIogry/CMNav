@@ -1,0 +1,7 @@
+schema_version: 1
+protocol: gcml_teacher_subgoal_diagnostic_v1
+project_root: ..
+source_run: outputs/gcml_navigation/20261023T155112Z_986f4f6b
+intervals: [4, 8, 16]
+methods: [gcml, gcml_graph_affordance]
+output_dir: outputs/gcml_subgoals

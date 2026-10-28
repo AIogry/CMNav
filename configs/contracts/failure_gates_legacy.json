@@ -1,0 +1,7 @@
+{
+  "description": "Original compact stdout filter; full JSON always includes every failed learned-G condition.",
+  "arguments": [
+    "--display-condition",
+    "gcml_4"
+  ]
+}
